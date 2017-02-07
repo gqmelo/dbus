@@ -3866,6 +3866,15 @@ _dbus_read_local_machine_uuid (DBusGUID   *machine_id,
 
   dbus_error_free (error);
 
+  /* Fallback to the machine ID of system-wide dbus*/
+  _dbus_string_init_const (&filename, "/var/lib/dbus/machine-id");
+
+  b = _dbus_read_uuid_file (&filename, machine_id, FALSE, error);
+  if (b)
+    return TRUE;
+
+  dbus_error_free (error);
+
   /* Fallback to the system machine ID */
   _dbus_string_init_const (&filename, "/etc/machine-id");
   b = _dbus_read_uuid_file (&filename, machine_id, FALSE, error);
