@@ -327,6 +327,8 @@ DBUS_PRIVATE_EXPORT
 void          _dbus_string_delete_leading_blanks (DBusString        *str);
 DBUS_PRIVATE_EXPORT
 void          _dbus_string_chop_white            (DBusString        *str); 
+DBUS_PRIVATE_EXPORT
+void          _dbus_string_chop_hyphens          (DBusString        *str);
 dbus_bool_t   _dbus_string_append_byte_as_hex    (DBusString        *str,
                                                   unsigned char      byte);
 DBUS_PRIVATE_EXPORT

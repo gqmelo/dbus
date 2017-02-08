@@ -2001,6 +2001,26 @@ _dbus_string_chop_white(DBusString *str)
 }
 
 /**
+ * Deletes hyphens
+ *
+ * @param str the string
+ */
+void
+_dbus_string_chop_hyphens(DBusString *str)
+{
+    unsigned int i;
+    int start = 0;
+    int found;
+
+    for (i = 0; i < 4; i++)
+      {
+        if (!_dbus_string_find (str, start, "-", &found)) break;
+        _dbus_string_delete (str, found, 1);
+        start = found;
+      }
+}
+
+/**
  * Tests two DBusString for equality.
  *
  * @todo memcmp is probably faster
