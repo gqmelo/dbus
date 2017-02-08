@@ -1,19 +1,17 @@
 # - Config file for the FooBar package
 # It defines the following variables
-#  DBUS1_INCLUDE_DIRS - include directories for FooBar
-#  DBUS1_LIBRARIES    - libraries to link against
-#  DBUS1_EXECUTABLE   - the bar executable
+#  DBus1_INCLUDE_DIRS - include directories for DBus1
+#  DBus1_LIBRARIES    - libraries to link against
 
 # Compute paths
-get_filename_component(DBUS1_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+get_filename_component(DBus1_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 
 # Our library dependencies (contains definitions for IMPORTED targets)
-if(NOT TARGET dbus-1 AND NOT DBUS1_BINARY_DIR)
-  include("${DBUS1_CMAKE_DIR}/DBus1Targets.cmake")
+if(NOT TARGET dbus-1 AND NOT DBus1_BINARY_DIR)
+  include("${DBus1_CMAKE_DIR}/DBus1Targets.cmake")
 endif()
 
-set(DBUS1_INCLUDE_DIRS "${_IMPORT_PREFIX}/include/dbus-1")
+set(DBus1_INCLUDE_DIRS "${_IMPORT_PREFIX}/include/dbus-1")
 
 # These are IMPORTED targets created by DBus1Targets.cmake
-set(DBUS1_LIBRARIES dbus-1)
-set(DBUS1_EXECUTABLE dbus-daemon)
+set(DBus1_LIBRARIES dbus-1)
