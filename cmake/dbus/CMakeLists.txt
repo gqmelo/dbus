@@ -304,7 +304,7 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
 endif("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
 
 install(TARGETS dbus-1 ${INSTALL_TARGETS_DEFAULT_ARGS})
-install(FILES ${dbusinclude_HEADERS} DESTINATION include/dbus)
+install(FILES ${dbusinclude_HEADERS} DESTINATION include/dbus-1/dbus)
 
 ### Internal library, used for the daemon, tools and tests, compiled statically.
 
