@@ -2,7 +2,7 @@ This file describes how to compile dbus using the cmake build system
 
 Requirements
 ------------
-- cmake version >= 2.4.4 see http://www.cmake.org
+- cmake version >= 2.6.0 see http://www.cmake.org
 - installed libexpat see http://sourceforge.net/projects/expat/ 
     unsupported RelWithDebInfo builds could be fetched 
     from http://sourceforge.net/projects/kde-windows/files/expat/
@@ -171,3 +171,22 @@ Note: The above mentioned options could be extracted after
 configuring from the output of running "<maketool> help-options" 
 in the build directory. The related entries start with 
 CMAKE_ or DBUS_. 
+
+
+How to compile clients using dbus with cmake
+--------------------------------------------
+
+To compile dbus library into a client application with cmake
+the following cmake commands are required:
+
+1. call find_package to find dbus package
+
+find_package(DBus1)
+
+2. after specifing targets link dbus into target
+
+add_executable(test test.c)
+target_link_libraries(test dbus-1)
+
+Adding dbus-1 to targets also adds required dbus include dirs
+and compiler definitions by default.
