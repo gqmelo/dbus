@@ -130,6 +130,42 @@ _dbus_file_get_contents (DBusString       *str,
           else
             total += bytes_read;
         }
+              
+      _dbus_close (fd, NULL);
+      return TRUE;
+    }
+  else if (sb.st_size == 0 && S_ISREG (sb.st_mode))
+    {
+      int bytes_read = -1;
+
+      while (bytes_read != 0)
+        {
+          if (total > _DBUS_ONE_MEGABYTE)
+            {
+              dbus_set_error (error, DBUS_ERROR_FAILED,
+                              "File size of \"%s\" is larger than %lu.",
+                              filename_c, (unsigned long) _DBUS_ONE_MEGABYTE);
+              _dbus_close (fd, NULL);
+              return FALSE;
+            }
+          bytes_read = _dbus_read (fd, str, 1024);
+          if (bytes_read < 0)
+            {
+              dbus_set_error (error, _dbus_error_from_errno (errno),
+                              "Error reading \"%s\": %s",
+                              filename_c,
+                              _dbus_strerror (errno));
+
+              _dbus_verbose ("read() failed: %s",
+                             _dbus_strerror (errno));
+
+              _dbus_close (fd, NULL);
+              _dbus_string_set_length (str, orig_len);
+              return FALSE;
+            }
+          else
+            total += bytes_read;
+        }
 
       _dbus_close (fd, NULL);
       return TRUE;

@@ -734,6 +734,7 @@ _dbus_read_uuid_file_without_creating (const DBusString *filename,
     goto error;
 
   _dbus_string_chop_white (&contents);
+  _dbus_string_chop_hyphens (&contents);
 
   if (_dbus_string_get_length (&contents) != DBUS_UUID_LENGTH_HEX)
     {
